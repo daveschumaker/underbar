@@ -38,10 +38,17 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
+
+    // TODO: Need to further test this with some different length arrays.
+    // But it seems to work for now.
+
+    // Debug / Testing stuff.
+    // TODO: Remove all this cruft later
     console.log(array);
     console.log("SLICE: " + n );
     console.log(n === undefined ? array[array.length - 1] : array.slice(n > array.length ? 0 : array.length - n, n+1));
     console.log("\n\n");
+
     return n === undefined ? array[array.length - 1] : array.slice(n > array.length - 1 ? 0 : array.length - n, n+1);
   };
 
@@ -51,6 +58,10 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+
+    // TODO: Check whether collection is an array or object. Then proceed from there.
+
+
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
