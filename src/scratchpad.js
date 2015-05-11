@@ -2,10 +2,31 @@
 * Quick scratch pad to quickly test out functions using nodejs
 **/
 
-var last = function(array, n) {
-    return n === undefined ? array[array.length - 1] : array.slice(array.length - (n+1), n);
-};
+  // Call iterator(value, key, collection) for each element of collection.
+  // Accepts both arrays and objects.
+  //
+  // Note: _.each does not have a return value, but rather simply runs the
+  // iterator function over each item in the input collection.
+  var each = function(collection, iterator) {
 
-// expect(_.first([1,2,3], 2)).to.eql([1, 2]);
+    // TODO: Check whether collection is an array or object. Then proceed from there.
+    for (var i = 0; i < collection.length ;i++) {
+      iterator(collection[i])
+    }
+  };
 
-console.log(last([1,2,3], 2));
+
+
+
+
+  // DEBUG TEST STUFF
+
+  var logger = function(output) {
+    console.log(output);
+  }
+
+
+  // Test array
+  var animals = ['ant', 'bat', 'cat'];
+
+  each(animals, logger);
