@@ -44,10 +44,12 @@
 
     // Debug / Testing stuff.
     // TODO: Remove all this cruft later
+    /*
     console.log(array);
     console.log("SLICE: " + n );
     console.log(n === undefined ? array[array.length - 1] : array.slice(n > array.length ? 0 : array.length - n, n+1));
     console.log("\n\n");
+    */
 
     return n === undefined ? array[array.length - 1] : array.slice(n > array.length - 1 ? 0 : array.length - n, n+1);
   };
@@ -61,9 +63,14 @@
 
     // TODO: Check whether collection is an array or object. Then proceed from there.
 
-    // TODO: Check whether collection is an array or object. Then proceed from there.
+    // If collection is an array, let's run this code.
     for (var i = 0; i < collection.length ;i++) {
-      iterator(collection[i])
+      
+      // Debug / Testing code
+      // TODO: Remove
+      //console.log(collection[i] + " " + i + " " + collection);
+      
+      iterator(collection[i], i, collection);
     }
 
   };

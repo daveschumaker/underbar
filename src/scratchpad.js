@@ -9,11 +9,20 @@
   // iterator function over each item in the input collection.
   var each = function(collection, iterator) {
 
-    // TODO: Check whether collection is an array or object. Then proceed from there.
-  
-  for (var i = 0; i < collection.length ;i++) {
-      console.log(collection[i] + " " + i + " " + collection);
-      iterator(collection[i], i, collection);
+    if (typeof collection[0] === "undefined") {
+      console.log("Collection is an object.");
+    } else {
+      // If collection is an array, let's run this code.
+      console.log("Collection is an array");
+      for (var i = 0; i < collection.length ;i++) {
+        
+        // Debug / Testing code
+        // TODO: Remove
+        //console.log(collection[i] + " " + i + " " + collection);
+        
+        iterator(collection[i], i, collection);
+      }    
+
     }
   
   };
@@ -26,7 +35,8 @@
 
 
   // Test array
-  var animals = ['ant', 'bat', 'cat'];
+  var animals = ['ant', 'bat', 'cat']; // Array
+  //var animals = { a: 'ant', b: 'bat', c: 'cat' }; // Object
   var iterationInputs = [];
 
   each(animals, function(animal, index, list) {
