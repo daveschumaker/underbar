@@ -44,14 +44,7 @@
     });
 
     return result;
-  };   
-
-  /*
-  *
-  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
-  *
-  */
-
+  };
 
   // Return all elements of an array that pass a truth test.
   var filter = function(collection, test) {
@@ -64,7 +57,23 @@
 
     return passedValues;
 
+  };   
+
+  /*
+  *
+  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
+  *
+  */
+
+  // Return all elements of an array that don't pass a truth test.
+  reject = function(collection, test) {
+    // TIP: see if you can re-use _.filter() here, without simply
+    // copying code in and modifying it
+  
+
   };
+
+
 
   // DEBUG TEST STUFF
 
