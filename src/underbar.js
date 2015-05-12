@@ -61,16 +61,26 @@
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
 
-    // TODO: Check whether collection is an array or object. Then proceed from there.
+    // First determine whether or not out collection is an object or an array.
+    if (typeof collection[0] === "undefined") {
+      // If collection is an object, let's run this code.
+      //console.log("Collection is an object.");
 
-    // If collection is an array, let's run this code.
-    for (var i = 0; i < collection.length ;i++) {
+      for (var key in collection) {
+        iterator(collection[key], key, collection);   
+      }
+    } else {
+      // If collection is an array, let's run this code.
+      //console.log("Collection is an array");
       
-      // Debug / Testing code
-      // TODO: Remove
-      //console.log(collection[i] + " " + i + " " + collection);
-      
-      iterator(collection[i], i, collection);
+      for (var i = 0; i < collection.length ;i++) {
+        
+        // Debug / Testing code
+        // TODO: Remove
+        //console.log(collection[i] + " " + i + " " + collection);
+        
+        iterator(collection[i], i, collection);
+      }    
     }
 
   };

@@ -10,10 +10,16 @@
   var each = function(collection, iterator) {
 
     if (typeof collection[0] === "undefined") {
-      console.log("Collection is an object.");
+      // If collection is an object, let's run this code.
+      //console.log("Collection is an object.");
+
+      for (var key in collection) {
+        iterator(collection[key], key, collection);   
+      }
     } else {
       // If collection is an array, let's run this code.
-      console.log("Collection is an array");
+      //console.log("Collection is an array");
+      
       for (var i = 0; i < collection.length ;i++) {
         
         // Debug / Testing code
@@ -35,8 +41,8 @@
 
 
   // Test array
-  var animals = ['ant', 'bat', 'cat']; // Array
-  //var animals = { a: 'ant', b: 'bat', c: 'cat' }; // Object
+  //var animals = ['ant', 'bat', 'cat']; // Array
+  var animals = { a: 'ant', b: 'bat', c: 'cat' }; // Object
   var iterationInputs = [];
 
   each(animals, function(animal, index, list) {
