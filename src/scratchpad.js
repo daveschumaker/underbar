@@ -37,7 +37,7 @@
     // it uses the iteration helper `each`, which you will need to write.
     var result = -1;
 
-    _.each(array, function(item, index) {
+    each(array, function(item, index) {
       if (item === target && result === -1) {
         result = index;
       }
@@ -69,8 +69,21 @@
   reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-  
 
+    // Create an array that will hold any values that pass the test.
+    var passedValues = [];
+
+    // Store array of values that are returned from passing the filter.
+    var testCollection = filter(collection, test);
+    
+    // Iterate over each element in our collection and see if the value is found in our filtered testCollection array.
+    each(collection, function(element) {
+      if (indexOf(testCollection, element) == -1) {
+        passedValues.push(element);
+      }
+    });
+
+    return passedValues;
   };
 
 
@@ -84,7 +97,7 @@
 
   // Test array
   var isEven = function(num) { return num % 2 === 0; };
-  var evens = filter([1, 2, 3, 4, 5, 6], isEven);
+  var odds = reject([1, 2, 3, 4, 5, 6], isEven);
 
-  console.log(evens);
+  console.log(odds);
   //each(animals, logger);
