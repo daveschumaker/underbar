@@ -87,8 +87,23 @@
   */
 
   // Produce a duplicate-free version of the array.
-  var uniq = function(array) {
-  
+  var reduce = function(collection, iterator, accumulator) {
+
+    var computeTotal; // Keep track of total number of whatever we're doing.
+
+    // Check if accumulator is defined and has a value.
+    // If so, set our initial total to be equal to whatever the accumulator is.
+    (typeof accumulator === "undefined") ? computeTotal = 0 : computeTotal = accumulator;
+    
+    each(collection, function(element, index) {
+      if (index == 0 && typeof accumulator === "undefined") {
+        computeTotal = element;
+      } else {
+        computeTotal = iterator(computeTotal, element); 
+      }
+    })
+
+    return computeTotal;
   };
 
 
@@ -100,8 +115,9 @@
 
 
   // Test array
-  var isEven = function(num) { return num % 2 === 0; };
-  var odds = reject([1, 2, 3, 4, 5, 6], isEven);
+  // should not invoke the iterator on the first element when using it as an accumulator
+  var sumSquares = function(tally, item) {return tally + item * item; };
+  var total = reduce([2, 3], sumSquares);
 
-  console.log(odds);
+  console.log(total);
   //each(animals, logger);

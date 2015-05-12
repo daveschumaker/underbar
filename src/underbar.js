@@ -210,6 +210,22 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+
+    var computeTotal; // Keep track of total number of whatever we're doing.
+
+    // Check if accumulator is defined and has a value.
+    // If so, set our initial total to be equal to whatever the accumulator is.
+    (typeof accumulator === "undefined") ? computeTotal = 0 : computeTotal = accumulator;
+    
+    _.each(collection, function(element, index) {
+      if (index == 0 && typeof accumulator === "undefined") {
+        computeTotal = element;
+      } else {
+        computeTotal = iterator(computeTotal, element); 
+      }
+    })
+
+    return computeTotal;
   };
 
   // Determine if the array or object contains a given value (using `===`).
