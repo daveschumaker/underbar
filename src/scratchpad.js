@@ -10,14 +10,13 @@
   var each = function(collection, iterator) {
 
     // TODO: Check whether collection is an array or object. Then proceed from there.
-    for (var i = 0; i < collection.length ;i++) {
-      iterator(collection[i])
+  
+  for (var i = 0; i < collection.length ;i++) {
+      console.log(collection[i] + " " + i + " " + collection);
+      iterator(collection[i], i, collection);
     }
+  
   };
-
-
-
-
 
   // DEBUG TEST STUFF
 
@@ -28,5 +27,11 @@
 
   // Test array
   var animals = ['ant', 'bat', 'cat'];
+  var iterationInputs = [];
 
-  each(animals, logger);
+  each(animals, function(animal, index, list) {
+          iterationInputs.push([animal, index, list]);
+  })
+
+  console.log(iterationInputs);
+  //each(animals, logger);

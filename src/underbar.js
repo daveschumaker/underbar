@@ -61,6 +61,10 @@
 
     // TODO: Check whether collection is an array or object. Then proceed from there.
 
+    // TODO: Check whether collection is an array or object. Then proceed from there.
+    for (var i = 0; i < collection.length ;i++) {
+      iterator(collection[i])
+    }
 
   };
 
