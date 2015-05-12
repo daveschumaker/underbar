@@ -28,7 +28,6 @@
         
         iterator(collection[i], i, collection);
       }    
-
     }
   
   };
