@@ -57,7 +57,12 @@
   var filter = function(collection, test) {
     var passedValues = []; // Create an array that will hold any values that pass the test.
     
-    console.log(each(collection, test));
+    // Iterate over our collection and check each element for truthiness based on our test function.
+    each(collection, function(element) {
+      if (test(element)) { passedValues.push(element) };
+    });
+
+    return passedValues;
 
   };
 
