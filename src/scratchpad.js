@@ -57,16 +57,10 @@
 
     return passedValues;
 
-  };   
-
-  /*
-  *
-  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
-  *
-  */
+  };
 
   // Return all elements of an array that don't pass a truth test.
-  reject = function(collection, test) {
+  var reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
 
@@ -84,8 +78,18 @@
     });
 
     return passedValues;
-  };
+  };  
 
+  /*
+  *
+  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
+  *
+  */
+
+  // Produce a duplicate-free version of the array.
+  var uniq = function(array) {
+  
+  };
 
 
   // DEBUG TEST STUFF

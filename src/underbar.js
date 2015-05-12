@@ -138,6 +138,19 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+
+    // Temporary array to store our values.
+    var uniqueValues = [];
+
+    _.each(array, function(element) {
+
+      if (_.indexOf(uniqueValues, element) == -1) {
+        uniqueValues.push(element);
+      }
+
+    });
+
+    return uniqueValues;
   };
 
 
