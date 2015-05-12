@@ -118,6 +118,22 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    
+    // Create an array that will hold any values that pass the test.
+    var passedValues = [];
+
+    // Store array of values that are returned from passing the filter.
+    var testCollection = _.filter(collection, test);
+    
+    // Iterate over each element in our collection and see if the value is found in our filtered testCollection array.
+    _.each(collection, function(element) {
+      if (_.indexOf(testCollection, element) == -1) {
+        passedValues.push(element);
+      }
+    });
+
+    return passedValues;
+
   };
 
   // Produce a duplicate-free version of the array.
