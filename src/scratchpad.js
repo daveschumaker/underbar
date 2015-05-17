@@ -117,13 +117,7 @@
       }
       return item === target;
     }, false);
-  };    
-
-  /*
-  *
-  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
-  *
-  */
+  };  
 
   // Determine whether all of the elements match a truth test.
   var every = function(collection, iterator) {
@@ -156,8 +150,38 @@
     //reduce(collection, function(wasFound, item) {
     //  logger("hmmmmm");
     //}, false);
-  };
+  };  
 
+  /*
+  *
+  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
+  *
+  */
+
+
+ // Determine whether any of the elements pass a truth test. If no iterator is
+  // provided, provide a default one
+  var some = function(collection, iterator) {
+    // TIP: There's a very clever way to re-use every() here.
+
+    //console.log(collection.length);
+
+    var BooleanStatus = false;
+
+    each(collection, function(item) {
+      // Check if a callback function is not passed as an argument.
+      if (typeof iterator == "undefined") {
+        if (item) {
+          BooleanStatus = true;
+        }
+      } else if (iterator(item)) {
+        BooleanStatus = true;
+      }
+
+    });
+
+    return BooleanStatus;
+  };
 
   // DEBUG TEST STUFF
 
@@ -170,5 +194,5 @@
     return num % 2 === 0;
   };
 
-  var getValue = every([true, true, true]);
+  var getValue = some([null, 0, undefined], identity);
   console.log(getValue);

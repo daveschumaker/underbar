@@ -277,6 +277,25 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+  
+    // Doing a similar thing as we did with _.every().
+    // Need to refactor this so that it uses the _.every() function.
+
+    var BooleanStatus = false;
+
+    _.each(collection, function(item) {
+      // Check if a callback function is not passed as an argument.
+      if (typeof iterator == "undefined") {
+        if (item) {
+          BooleanStatus = true;
+        }
+      } else if (iterator(item)) {
+        BooleanStatus = true;
+      }
+
+    });
+
+    return BooleanStatus;
   };
 
 
