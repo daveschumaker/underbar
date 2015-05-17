@@ -318,6 +318,25 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    // Create a new object to temporarily store key-value pairs.
+    var newObject = obj; 
+
+    // We first need to iterate over parameters passed into the function
+    // since we won't know ahead of time how many objects will be passed into
+    // this function.
+
+    _.each(arguments, function(getobj) {
+      //console.log(getobj);
+      // For each argument, we now need to iterate through that object to
+      // properly extract the key-value pairs.
+      // Iterate over each value in the object
+      _.each(getobj, function(value, key) {
+        //console.log(key + ": " + value);
+        newObject[key] = value;
+      });     
+    })
+
+    return newObject;
   };
 
   // Like extend, but doesn't ever overwrite a key that already

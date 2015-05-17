@@ -152,13 +152,6 @@
     //}, false);
   };  
 
-  /*
-  *
-  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
-  *
-  */
-
-
  // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   var some = function(collection, iterator) {
@@ -181,6 +174,34 @@
     });
 
     return BooleanStatus;
+  };  
+
+  /*
+  *
+  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
+  *
+  */
+
+  var extend = function(obj) {
+    // Create a new object to temporarily store key-value pairs.
+    var newObject = obj; 
+
+    // We first need to iterate over parameters passed into the function
+    // since we won't know ahead of time how many objects will be passed into
+    // this function.
+
+    each(arguments, function(getobj) {
+      console.log(getobj);
+      // For each argument, we now need to iterate through that object to
+      // properly extract the key-value pairs.
+      // Iterate over each value in the object
+      each(getobj, function(value, key) {
+        console.log(key + ": " + value);
+        newObject[key] = value;
+      });     
+    })
+
+    return newObject;
   };
 
   // DEBUG TEST STUFF
@@ -189,10 +210,10 @@
     console.log(output);
   }
 
-  // Test array
-  var isEven = function(num) {
-    return num % 2 === 0;
-  };
+        var to = {};
+        var from = {};
+        var extended = extend(to, from);
 
-  var getValue = some([null, 0, undefined], identity);
-  console.log(getValue);
+  console.log(extended);
+
+  console.log (extended == to);
