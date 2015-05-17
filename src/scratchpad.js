@@ -6,6 +6,13 @@
 **/
 
 
+  // Returns whatever value is passed as the argument. This function doesn't
+  // seem very useful, but remember it--if a function needs to provide an
+  // iterator when the user does not pass one in, this will be handy.
+  var identity = function(val) {
+    return val;
+  };
+
   // Functions we wrote earlier
   var each = function(collection, iterator) {
       // First determine whether or not out collection is an object or an array.
@@ -80,12 +87,6 @@
     return passedValues;
   };  
 
-  /*
-  *
-  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
-  *
-  */
-
   // Produce a duplicate-free version of the array.
   var reduce = function(collection, iterator, accumulator) {
 
@@ -106,6 +107,57 @@
     return computeTotal;
   };
 
+  // Determine if the array or object contains a given value (using `===`).
+  var contains = function(collection, target) {
+    // TIP: Many iteration problems can be most easily expressed in
+    // terms of reduce(). Here's a freebie to demonstrate!
+    return reduce(collection, function(wasFound, item) {
+      if (wasFound) {
+        return true;
+      }
+      return item === target;
+    }, false);
+  };    
+
+  /*
+  *
+  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
+  *
+  */
+
+  // Determine whether all of the elements match a truth test.
+  var every = function(collection, iterator) {
+
+    // We're going to store the truthiness value of our collection here.
+    // We will assume it's true unless otherwise noted below.
+    var BooleanStatus = true; 
+    
+    // Trying to get this to work using _.each right now so I understand what's happening.
+    console.log("Collection:");
+    console.log(collection);
+    console.log("\nIterator:");
+    console.log(iterator);
+
+    each(collection, function(item) {
+      // Check if a callback function is not passed as an argument.
+      if (typeof iterator == "undefined") {
+        if (!item) {
+          BooleanStatus = false;
+        }
+      } else if (!iterator(item)) {
+        BooleanStatus = false;
+      }
+    });
+
+    return BooleanStatus;
+ 
+    // TIP: Try re-using reduce() here.
+
+    //reduce(collection, function(wasFound, item) {
+    //  logger("hmmmmm");
+    //}, false);
+  };
+
 
   // DEBUG TEST STUFF
 
@@ -113,11 +165,10 @@
     console.log(output);
   }
 
-
   // Test array
-  // should not invoke the iterator on the first element when using it as an accumulator
-  var sumSquares = function(tally, item) {return tally + item * item; };
-  var total = reduce([2, 3], sumSquares);
+  var isEven = function(num) {
+    return num % 2 === 0;
+  };
 
-  console.log(total);
-  //each(animals, logger);
+  var getValue = every([true, true, true]);
+  console.log(getValue);

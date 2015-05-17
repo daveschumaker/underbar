@@ -243,7 +243,34 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
+    // We're going to store the truthiness value of our collection here.
+    // We will assume it's true unless otherwise noted below.
+    var BooleanStatus = true; 
+    
+    // Trying to get this to work using _.each right now so I understand what's happening.
+    //console.log("Collection:");
+    //console.log(collection);
+    //console.log("\nIterator:");
+    // console.log(iterator);  
+
+    _.each(collection, function(item) {
+      // Check if a callback function is not passed as an argument.
+      if (typeof iterator == "undefined") {
+        if (!item) {
+          BooleanStatus = false;
+        }
+      } else if (!iterator(item)) {
+        BooleanStatus = false;
+      }
+    });
+
+    return BooleanStatus;
+ 
     // TIP: Try re-using reduce() here.
+
+    //reduce(collection, function(wasFound, item) {
+    //  logger("hmmmmm");
+    //}, false);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
