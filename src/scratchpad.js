@@ -198,12 +198,6 @@
     return newObject;
   };  
 
-  /*
-  *
-  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
-  *
-  */
-
  // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   var defaults = function(obj) {
@@ -235,13 +229,112 @@
     return newObject;
   };
 
+  /*
+  *
+  * BEGIN SCRATCHPAD FOR CURRENT PROBLEMS WE'RE WORKING ON.
+  *
+  */
+
+  // Return a function that can be called at most one time. Subsequent calls
+  // should return the previously returned value.
+  var once = function(func) {
+    // TIP: These variables are stored in a "closure scope" (worth researching),
+    // so that they'll remain available to the newly-generated function every
+    // time it's called.
+    var alreadyCalled = false;
+    var result;
+
+    // TIP: We'll return a new function that delegates to the old one, but only
+    // if it hasn't been called before.
+    return function() {
+      if (!alreadyCalled) {
+        // TIP: .apply(this, arguments) is the standard way to pass on all of the
+        // infromation from one function call to another.
+        result = func.apply(this, arguments);
+        alreadyCalled = true;
+      }
+      // The new function always returns the originally computed result.
+      return result;
+    };
+  };  
+
+  // Memorize an expensive function's results by storing them. You may assume
+  // that the function takes only one argument and that it is a primitive.
+  // memoize could be renamed to oncePerUniqueArgumentList; memoize does the
+  // same thing as once, but based on many sets of unique arguments.
+  //
+  // _.memoize should return a function that, when called, will check if it has
+  // already computed the result for the given argument and return that value
+  // instead if possible.
+  var memoize = function(func) {
+    // Store an array of results to keep track of values that we've already computed.
+    var computedResults = [];
+    var result;
+
+    //logger(computedResults);
+
+    return function() {
+      
+      // Store our arguments in a variable that we can access later within another function.
+      var myArgs = arguments;
+
+      // On the initial run, our each() function will return an undefined value and
+      // bad things will happen.
+      
+      //logger(computedResults);
+      if (computedResults.length == 0) {
+        result = func.apply(this, arguments);
+
+        // Store results in an object that we'll store and later search for.
+        computedResults.push({args:arguments, computedResult: result});
+        //return result;
+      } else {
+        // Use one of our earlier functions to iterate over our arrays.
+        // and search for whether value has already been calculated.
+        each(computedResults, function(item) {
+          // Not the most robust code, but this looks at our arguments and compares
+          // to results found in array.
+          //logger(myArgs);
+          if (item.args == myArgs) {
+            // If our computed result has been found, return the already calculated result.
+            //logger("Dupe detected!!");
+            result = item.computedResult;
+          } else {
+            //logger("No dupe");
+            result = func.apply(this, myArgs);
+
+            // Store results in an object that we'll store and later search for.
+            computedResults.push({args:myArgs, computedResult: result});
+          }
+
+        });
+      }
+
+      //logger(computedResults);
+
+      return result;
+    }
+  };
+
   // DEBUG TEST STUFF
 
   var logger = function(output) {
     console.log(output);
   }
   
-  var to = {};
-  var from = { a: 1 };
+// Memoize stuff....
+  var add = function(a, b) {
+    return a + b;
+  };
 
-  console.log(defaults(to, from));
+  memoAdd = memoize(add);
+
+  console.log(memoAdd(1,2));
+  console.log(memoAdd(3,4));
+
+  var spy = sinon.spy(function() { return 'Dummy output'; });
+  var memoSpy = _.memoize(spy);  
+
+  memoSpy(10);
+
+

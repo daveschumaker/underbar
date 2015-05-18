@@ -411,6 +411,51 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    // Store an array of results to keep track of values that we've already computed.
+    var computedResults = [];
+    var result;
+
+    //logger(computedResults);
+
+    return function() {
+      
+      // Store our arguments in a variable that we can access later within another function.
+      var myArgs = arguments;
+
+      // On the initial run, our each() function will return an undefined value and
+      // bad things will happen.
+      
+      //logger(computedResults);
+      if (computedResults.length == 0) {
+        result = func.apply(this, arguments);
+
+        // Store results in an object that we'll store and later search for.
+        computedResults.push({args:arguments, computedResult: result});
+        //return result;
+      } else {
+        // Use one of our earlier functions to iterate over our arrays.
+        // and search for whether value has already been calculated.
+        _.each(computedResults, function(item) {
+          // Not the most robust code, but this looks at our arguments and compares
+          // to results found in array.
+          //logger(myArgs);
+          if (item.args == myArgs) {
+            // If our computed result has been found, return the already calculated result.
+            result = item.computedResult;
+          } else {
+            result = func.apply(this, myArgs);
+
+            // Store results in an object that we'll store and later search for.
+            computedResults.push({args:myArgs, computedResult: result});
+          }
+
+        });
+      }
+
+      console.log(computedResults);
+      console.log(result);
+      return result;
+    }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
