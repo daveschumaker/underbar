@@ -419,7 +419,6 @@
       
       // Store our arguments in a variable that we will clean up with JSON.stringify in order
       // to use them as a key.
-
       var myArgs = JSON.stringify(arguments);
 
       // Check if argument has already been computed. If not, run function and
@@ -440,6 +439,20 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    // Store our arguments so we can pass into the callback function. 
+    var myArgs = arguments;
+
+    setTimeout(function() {
+      // Check if we have additional arguments to pass into the function.
+      if (myArgs.length > 2) {
+        // This works, but we'd probably want to make it more robust so that it can account for any
+        // number of additional arguments.
+        return func(myArgs[2], myArgs[3]);
+      } else {
+        return func();
+      }
+    }, wait);
+
   };
 
 
