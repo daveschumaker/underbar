@@ -412,49 +412,24 @@
   // instead if possible.
   _.memoize = function(func) {
     // Store an array of results to keep track of values that we've already computed.
-    var computedResults = [];
-    var result;
-
-    //logger(computedResults);
+    var computedResults = {};
+    var result; 
 
     return function() {
       
-      // Store our arguments in a variable that we can access later within another function.
-      var myArgs = arguments;
+      // Store our arguments in a variable that we will clean up with JSON.stringify in order
+      // to use them as a key.
 
-      // On the initial run, our each() function will return an undefined value and
-      // bad things will happen.
-      
-      //logger(computedResults);
-      if (computedResults.length == 0) {
+      var myArgs = JSON.stringify(arguments);
+
+      // Check if argument has already been computed. If not, run function and
+      // add results to our array.
+      if (!computedResults[myArgs]) {
         result = func.apply(this, arguments);
-
-        // Store results in an object that we'll store and later search for.
-        computedResults.push({args:arguments, computedResult: result});
-        //return result;
-      } else {
-        // Use one of our earlier functions to iterate over our arrays.
-        // and search for whether value has already been calculated.
-        _.each(computedResults, function(item) {
-          // Not the most robust code, but this looks at our arguments and compares
-          // to results found in array.
-          //logger(myArgs);
-          if (item.args == myArgs) {
-            // If our computed result has been found, return the already calculated result.
-            result = item.computedResult;
-          } else {
-            result = func.apply(this, myArgs);
-
-            // Store results in an object that we'll store and later search for.
-            computedResults.push({args:myArgs, computedResult: result});
-          }
-
-        });
+        computedResults[myArgs] = result;
       }
 
-      console.log(computedResults);
-      console.log(result);
-      return result;
+      return computedResults[myArgs];
     }
   };
 
