@@ -467,6 +467,24 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    // Copy array elements into a new array using slice.
+    var copiedArray = array.slice();
+    var newArray = []; // This is where will push new values to.
+
+    // Build a loop that will iterate through our array.
+    for (var i = 0; i < array.length; i++) {
+
+      // Choose a random number based on the number of elements in our array
+      var getElement = Math.floor(Math.random() * (copiedArray.length)+0);
+      
+      // Use array.splice() to remove the random element chosen above from the copiedArray.
+      var getValue = copiedArray.splice(getElement,1);
+
+      // Push the randomly chosen element (which is returned as an array) into a new array.
+      newArray.push(getValue[0]);
+    }
+
+    return newArray;
   };
 
 
